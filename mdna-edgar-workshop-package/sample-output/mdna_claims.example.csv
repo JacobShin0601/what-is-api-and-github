@@ -1,0 +1,3 @@
+claim_id,topic,management_claim,analyst_interpretation,historical_or_forward_looking,metric,current_value,prior_value,unit,currency,period,financial_statement_source,source_heading,evidence_excerpt,accession_number,verification_status,reviewer_note
+MDA-001,revenue,"Management attributed revenue growth to price and volume factors.","Both drivers require separate quantification.",historical,Revenue,,,millions,USD,FY20XX,Income statement,Results of Operations,"Short evidence excerpt",0000000000-00-000000,needs_source,"Example row only"
+

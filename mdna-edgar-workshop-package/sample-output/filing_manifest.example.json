@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "YYYY-MM-DDTHH:MM:SS+00:00",
+  "ticker": "TICKER",
+  "edgartools_version": "5.49.0",
+  "records": [
+    {
+      "role": "current",
+      "company": "Example Company",
+      "cik": "0000000000",
+      "form": "10-K",
+      "filing_date": "YYYY-MM-DD",
+      "period_of_report": "YYYY-MM-DD",
+      "accession_number": "0000000000-00-000000",
+      "sec_filing_url": "https://www.sec.gov/Archives/...",
+      "extraction_method": "TenK.management_discussion",
+      "extracted_characters": 10000,
+      "validation_status": "PASS",
+      "section_metadata": {},
+      "warnings": []
+    }
+  ],
+  "final_status": "PASS",
+  "identity_stored": false
+}
+

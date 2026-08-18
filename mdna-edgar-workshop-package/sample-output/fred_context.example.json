@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "ticker": "DEMO",
+  "claim_id": "C001",
+  "as_of_date": "2026-08-18",
+  "retrieved_at": "2026-08-18T00:00:00+00:00",
+  "warning": "Macro co-movement does not prove company-specific causation.",
+  "series": [
+    {
+      "series_id": "FEDFUNDS",
+      "title": "Federal Funds Effective Rate",
+      "units": "Percent",
+      "frequency": "Monthly",
+      "seasonal_adjustment": "Not Seasonally Adjusted",
+      "last_updated": "2026-08-01",
+      "evidence_role": "context_only",
+      "observations": [
+        {
+          "date": "2026-07-01",
+          "realtime_start": "2026-08-01",
+          "realtime_end": "2026-08-01",
+          "value": "5.0"
+        }
+      ]
+    }
+  ]
+}

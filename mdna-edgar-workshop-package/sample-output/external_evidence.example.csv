@@ -1,0 +1,3 @@
+external_id,claim_id,provider,evidence_type,title_or_series,source_url_or_series_id,evidence_date,as_of_date,primary_or_secondary,supports_or_contradicts,evidence_role,review_note
+TV001,C001,Tavily,news,Example company announcement,https://example.com/source,2026-08-01,2026-08-18,secondary,unreviewed,unresolved,Open original source before classification
+FR001,C001,FRED,macro_series,Federal Funds Effective Rate,FEDFUNDS,2026-07-01,2026-08-18,primary,context,context_only,Co-movement does not establish company causation
