@@ -5,10 +5,11 @@
 ## 시작 순서
 
 1. `README.md`, `PARTICIPANT-WORKBOOK.md`, `AGENT-PROMPTS.md`를 읽는다.
-2. 사용자가 지정한 `workspace/<TICKER>/filing_manifest.json`을 연다.
-3. `extraction_check.md`가 `PASS`인지 확인한다.
-4. PASS가 아니면 분석하지 말고 문제와 해결 후보만 보고한다.
-5. PASS이면 `AGENT-PROMPTS.md`의 Turn 순서대로 진행한다.
+2. `.env` 파일의 존재와 필요한 변수의 설정 여부만 확인한다. 값은 읽어 화면에 표시하거나 프롬프트로 요청하지 않는다.
+3. 사용자가 지정한 `workspace/<TICKER>/filing_manifest.json`을 연다.
+4. `extraction_check.md`가 `PASS`인지 확인한다.
+5. PASS가 아니면 분석하지 말고 문제와 해결 후보만 보고한다.
+6. PASS이면 `AGENT-PROMPTS.md`의 Turn 순서대로 진행한다.
 
 ## 변경 범위
 
@@ -36,6 +37,7 @@
 - 법률 의견, 감사 의견 또는 세무 결론으로 표현
 - API key, 토큰, 계좌번호, 개인 연락처 출력
 - API key를 결과 JSON, 로그, 프롬프트 또는 Git에 저장
+- `.env` 내용을 읽어 출력·요약·복사하거나 Git에 추가
 - SEC 원문을 확인하지 않은 상태에서 `verified` 사용
 - 추출 실패를 무시하고 분석 계속
 

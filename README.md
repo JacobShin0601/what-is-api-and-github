@@ -12,6 +12,17 @@
 6. EDGAR·Tavily·FRED 근거를 Evidence Register로 통합
 7. 투자·법무·회계 관점 검토와 Human Gate
 
+## 시작은 `.env` 한 파일만
+
+저장소를 받은 뒤 실습 패키지 폴더에서 다음 순서로 시작합니다.
+
+```text
+cd mdna-edgar-workshop-package
+python scripts/setup_env.py
+```
+
+Windows는 `notepad .env`, macOS는 `open -e .env`로 파일을 열어 `SEC_IDENTITY`와 사용할 API key만 채웁니다. 이후 모든 실습 스크립트가 같은 `.env`를 자동으로 읽습니다. 실제 `.env`는 Git에서 제외되고, 공유되는 `.env.example`에는 변수명과 빈 자리만 있습니다.
+
 ## 바로 열기
 
 - [전체 워크숍 교안](API-GitHub-AI-Agent-60min-workshop.md)
@@ -33,7 +44,7 @@ FRED ───────────── 공식 거시지표 ─────
 
 ## 주의사항
 
-- API key는 코드·프롬프트·Git에 저장하지 않고 현재 터미널의 환경 변수로만 전달합니다.
+- 실제 API key는 로컬 `.env` 한 파일에만 저장하고 코드·프롬프트·Git에는 넣지 않습니다.
 - Tavily 검색 결과는 원문 후보이며 공식 공시를 대체하지 않습니다.
 - FRED의 거시 추세는 개별 기업의 인과관계를 자동으로 증명하지 않습니다.
 - 이 자료는 교육용이며 투자 추천, 법률 의견, 회계감사 결론 또는 자동매매 지시를 생성하지 않습니다.

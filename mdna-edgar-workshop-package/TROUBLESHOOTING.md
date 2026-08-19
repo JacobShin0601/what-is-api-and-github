@@ -12,8 +12,9 @@ python -m pip install -r requirements.txt
 
 ## Tavily 또는 FRED 키 오류
 
-- 환경 변수 이름은 각각 `TAVILY_API_KEY`, `FRED_API_KEY`다.
-- 키 값을 확인하기 위해 화면에 출력하지 않는다. 터미널 세션을 닫으면 다시 설정한다.
+- 패키지 루트에 `.env`가 없으면 `python scripts/setup_env.py`를 실행한다.
+- `.env`의 변수 이름은 각각 `TAVILY_API_KEY`, `FRED_API_KEY`다. 등호 오른쪽에 실제 값을 넣고 저장한다.
+- 키 값을 확인하기 위해 화면에 출력하지 않는다. `python scripts/check_environment.py --require-tavily`로 존재 여부만 확인한다.
 - 401은 보통 인증, 429는 사용량·속도 한도를 확인한다.
 - Tavily 검색이 비어 있으면 회사명·ticker·기간·사건 유형을 포함해 query를 좁힌다.
 - FRED series ID가 틀리면 FRED 공식 series search에서 확인한다.
@@ -36,21 +37,21 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ## `SEC_IDENTITY`가 없다고 나옴
 
-SEC 요청에는 이름과 연락 가능한 이메일이 필요하다.
+SEC 요청에는 이름과 연락 가능한 이메일이 필요하다. `.env`를 열어 다음 줄의 예시를 실제 정보로 바꾸고 저장한다.
 
-Windows:
-
-```powershell
-$env:SEC_IDENTITY = "Your Name your-email@example.com"
-```
-
-macOS:
-
-```bash
-export SEC_IDENTITY="Your Name your-email@example.com"
+```text
+SEC_IDENTITY="Your Name your-email@example.com"
 ```
 
 공유 화면이나 제출 파일에 개인 이메일을 복사하지 않는다. identity는 manifest에 저장되지 않는다.
+
+## `.env`를 수정했는데 반영되지 않음
+
+- 명령을 패키지 폴더에서 실행했는지 확인한다.
+- `.env.txt`가 아니라 정확히 `.env`인지 확인한다. Windows 메모장에서는 파일 확장자가 숨겨질 수 있다.
+- 운영체제에 이미 같은 이름의 환경 변수가 있으면 그 값이 우선한다. 기존 세션 변수를 제거하거나 새 터미널에서 다시 실행한다.
+- `.env`의 따옴표가 짝이 맞는지, 변수명 앞에 공백이 없는지 확인한다.
+- 키 값은 출력하지 말고 환경 점검표의 PASS/FAIL만 확인한다.
 
 ## SEC 요청 오류 또는 속도 제한
 

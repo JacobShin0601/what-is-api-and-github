@@ -9,6 +9,7 @@ AGENTS.md를 읽고 workspace/AAPL을 대상으로 작업해.
 
 아직 분석 파일을 만들거나 기존 파일을 수정하지 마.
 다음 입력만 점검해서 표로 보고해:
+- .env 존재 여부와 SEC_IDENTITY, TAVILY_API_KEY의 설정 여부(값은 절대 출력하지 않음)
 - filing_manifest.json 존재 및 JSON 파싱 가능 여부
 - current와 prior의 form, filing_date, period_of_report, accession_number
 - mdna_current.md와 mdna_prior.md의 크기와 첫 소제목
@@ -109,7 +110,7 @@ mdna_claims.csv를 갱신하되 행을 조용히 삭제하지 마.
 
 ## Turn 4 — Tavily·FRED 외부 근거 분류와 통합
 
-먼저 `scripts/search_external_news.py`를 사용해 선택한 핵심 claim 1–3개와 관련된 최신 사건을 수집한다. FRED 트랙을 선택한 경우에만 `scripts/fetch_fred_context.py`를 실행한다. 키 값은 Agent에게 전달하지 않고 사용자가 터미널 환경 변수로 설정한다.
+먼저 `scripts/search_external_news.py`를 사용해 선택한 핵심 claim 1–3개와 관련된 최신 사건을 수집한다. FRED 트랙을 선택한 경우에만 `scripts/fetch_fred_context.py`를 실행한다. 각 스크립트는 사용자가 한 번 수정한 `.env`를 자동으로 읽는다. Agent는 키 값을 읽거나 출력하거나 프롬프트로 요청하지 않는다.
 
 ```text
 workspace/AAPL의 mdna_claims.csv, tavily_evidence.json을 읽어.

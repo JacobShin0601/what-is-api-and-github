@@ -49,7 +49,10 @@ VERIFICATION.md             패키지 실행 검증 기록
 AGENTS.md                   Codex 등 Agent가 읽는 프로젝트 규칙
 CLAUDE.md                   Claude Code 진입 지침
 requirements.txt            검증된 Python 의존성
+.env.example                참가자가 복사해 한 번만 수정하는 설정 양식
 scripts/check_environment.py
+scripts/setup_env.py         .env을 안전하게 생성
+scripts/env_loader.py        모든 실습 스크립트의 공통 설정 로더
 scripts/extract_mdna.py
 scripts/search_external_news.py
 scripts/fetch_fred_context.py
@@ -68,7 +71,17 @@ workspace/                  참가자 실행 결과 저장 위치
 - Tavily API key
 - FRED API key(거시환경 선택 트랙)
 
-EDGAR와 EdgarTools는 별도 API key를 요구하지 않으며 SEC 요청에는 연락 가능한 identity가 필요하다. Tavily와 FRED 키는 현재 터미널의 환경 변수로만 전달한다. 앱 시크릿·증권사 계좌·개인 API key를 파일·프롬프트·Git에 입력하지 않는다.
+EDGAR와 EdgarTools는 별도 API key를 요구하지 않으며 SEC 요청에는 연락 가능한 identity가 필요하다. 참가자는 `.env.example`을 복사해 만든 `.env` **한 파일만** 수정한다. 모든 스크립트가 이 파일을 자동으로 읽으며 `.env`는 Git에서 제외된다. `.env.example`에는 변수 이름과 빈 자리만 남긴다. 앱 시크릿·증권사 계좌·개인 API key를 프롬프트·소스 코드·Git에 입력하지 않는다.
+
+## 한 파일 설정 원리
+
+```text
+.env.example ── setup_env.py ──→ .env (참가자가 여기만 수정)
+                                      ↓ 자동 로드
+              EDGAR · Tavily · SerpAPI · FRED 실습 스크립트
+```
+
+`.env`에는 `SEC_IDENTITY`, `TAVILY_API_KEY`, 선택형 `SERPAPI_KEY`, `FRED_API_KEY`를 적는다. 운영체제에 이미 같은 이름의 환경 변수가 있으면 그 값이 우선하며 `.env` 값으로 덮어쓰지 않는다. 키 값은 화면에 출력하거나 제출 파일에 복사하지 않는다.
 
 ## Windows PowerShell 빠른 시작
 
@@ -78,9 +91,8 @@ EDGAR와 EdgarTools는 별도 API key를 요구하지 않으며 SEC 요청에는
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-$env:SEC_IDENTITY = "Your Name your-email@example.com"
-$env:TAVILY_API_KEY = Read-Host "Tavily API key"
-# 선택: $env:FRED_API_KEY = Read-Host "FRED API key"
+python scripts\setup_env.py
+notepad .env
 python scripts\check_environment.py --require-tavily
 python scripts\extract_mdna.py --ticker AAPL
 python scripts\search_external_news.py --ticker AAPL --company "Apple Inc." --claim-id C001 --query "demand pricing margin supply regulation latest developments"
@@ -99,9 +111,8 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-export SEC_IDENTITY="Your Name your-email@example.com"
-read -s "TAVILY_API_KEY?Tavily API key: "; export TAVILY_API_KEY; echo
-# 선택: read -s "FRED_API_KEY?FRED API key: "; export FRED_API_KEY; echo
+python scripts/setup_env.py
+open -e .env
 python scripts/check_environment.py --require-tavily
 python scripts/extract_mdna.py --ticker AAPL
 python scripts/search_external_news.py --ticker AAPL --company "Apple Inc." --claim-id C001 --query "demand pricing margin supply regulation latest developments"

@@ -19,6 +19,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from env_loader import load_workshop_env
+
 
 MIN_SECTION_CHARS = 3_000
 MAX_SECTION_CHARS = 250_000
@@ -286,10 +288,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    load_workshop_env()
     args = parse_args()
     identity = (args.identity or os.getenv("SEC_IDENTITY", "")).strip()
     if not identity or "@" not in identity:
-        print("ERROR: set SEC_IDENTITY to 'Your Name email@example.com'", file=sys.stderr)
+        print("ERROR: fill SEC_IDENTITY in .env, then retry", file=sys.stderr)
         return 2
 
     try:

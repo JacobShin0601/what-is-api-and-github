@@ -2,12 +2,13 @@
 
 ## 검증 환경
 
-- 검증일: 2026-08-18
+- 검증일: 2026-08-19
 - 운영체제: macOS arm64
 - Python: 3.10.2
 - EdgarTools: 5.49.0
 - Tavily SDK: 0.7.27
-- 검증 명령: `scripts/check_environment.py`, `scripts/extract_mdna.py`, hybrid script mock tests
+- python-dotenv: 1.2.3
+- 검증 명령: `scripts/setup_env.py`, `scripts/check_environment.py`, `scripts/extract_mdna.py`, hybrid script mock tests
 
 ## 라이브 EDGAR 실행 결과
 
@@ -33,6 +34,9 @@
 - FRED metadata·observations가 series ID와 함께 저장되고 missing value `.`가 null로 변환됨
 - FRED 결과의 역할이 `context_only`이며 API key가 JSON에 저장되지 않음
 - Tavily·FRED 키가 없을 때 비밀값을 출력하지 않고 명확한 오류로 종료
+- `.env.example`에서 `.env`를 생성하고 기존 `.env`는 덮어쓰지 않음
+- 모든 스크립트가 같은 `.env`를 자동으로 읽고 기존 운영체제 환경변수를 덮어쓰지 않음
+- `.env`는 Git·ZIP에서 제외되고 `.env.example`에는 실제 키가 없음
 
 ## Hybrid script 검증 범위
 

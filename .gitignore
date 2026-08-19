@@ -4,6 +4,7 @@ __pycache__/
 *.py[cod]
 .env
 .env.*
+!.env.example
 
 # Participant-generated company workspaces; keep the instructions file.
 mdna-edgar-workshop-package/workspace/*/

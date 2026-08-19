@@ -26,11 +26,15 @@
 - [Series search](https://fred.stlouisfed.org/docs/api/fred/series_search.html) — 관련 series ID 찾기
 - [Vintage dates](https://fred.stlouisfed.org/docs/api/fred/series_vintagedates.html) — 당시 이용 가능했던 데이터 재현
 
+## 환경 설정
+
+- [python-dotenv documentation](https://bbc2.github.io/python-dotenv/) — `.env` 로드, 기존 운영체제 환경변수 우선, Git 제외 원칙
+
 ## 적용 원칙
 
 - 라이브러리 결과보다 SEC 원문을 최종 근거로 사용한다.
 - 수업 환경에서는 `requirements.txt`의 검증 버전을 유지한다.
 - 다른 버전으로 변경하면 `scripts/extract_mdna.py`를 대표 종목으로 다시 검증한다.
-- SEC identity는 환경변수로만 전달하고 산출물에는 저장하지 않는다.
+- SEC identity와 API key는 Git에서 제외된 `.env`로 전달하고 산출물에는 저장하지 않는다.
 - Tavily는 최신 근거 후보를 찾는 탐색 도구이며 원 출처를 다시 연다.
 - FRED는 공식 거시맥락이지만 개별 기업의 인과관계 증거로 사용하지 않는다.

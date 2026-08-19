@@ -152,18 +152,21 @@ claude
 
 ### F. 실습 폴더와 가상환경 만들기
 
-강사는 배포 전에 `<WORKSHOP_REPOSITORY_URL>`을 패키지를 올린 실제 GitHub URL로 바꾼다. ZIP으로 배포하면 압축을 푼 `mdna-edgar-workshop-package` 폴더로 이동한 뒤 `git clone` 두 줄 다음부터 실행한다.
+GitHub로 받으면 공개 수업 저장소를 clone하고 실습 패키지 폴더로 이동한다. ZIP으로 받으면 압축을 푼 `mdna-edgar-workshop-package` 폴더에서 `git clone` 두 줄 다음부터 실행한다.
 
 ```powershell
 New-Item -ItemType Directory -Force "$HOME\Documents\api-git-ai-workshop" | Out-Null
 Set-Location "$HOME\Documents\api-git-ai-workshop"
-git clone <WORKSHOP_REPOSITORY_URL> mdna-evidence-lab
-Set-Location mdna-evidence-lab
+git clone https://github.com/JacobShin0601/what-is-api-and-github.git
+Set-Location what-is-api-and-github\mdna-edgar-workshop-package
 py -V:3.12 -m venv .venv
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+python scripts\setup_env.py
+notepad .env
+python scripts\check_environment.py --require-tavily
 ```
 
 확인:
@@ -171,7 +174,7 @@ python -m pip install -r requirements.txt
 ```powershell
 git log -1 --oneline
 python --version
-python -c "import edgar, tavily; print('READY')"
+python -c "import edgar, tavily, dotenv; print('READY')"
 ```
 
 마지막 줄에 `READY`가 나오면 준비 완료다.
@@ -242,17 +245,20 @@ claude
 
 ### E. 실습 폴더와 가상환경 만들기
 
-강사는 배포 전에 `<WORKSHOP_REPOSITORY_URL>`을 패키지를 올린 실제 GitHub URL로 바꾼다. ZIP으로 배포하면 압축을 푼 `mdna-edgar-workshop-package` 폴더로 이동한 뒤 `git clone` 두 줄 다음부터 실행한다.
+GitHub로 받으면 공개 수업 저장소를 clone하고 실습 패키지 폴더로 이동한다. ZIP으로 받으면 압축을 푼 `mdna-edgar-workshop-package` 폴더에서 `git clone` 두 줄 다음부터 실행한다.
 
 ```bash
 mkdir -p ~/Documents/api-git-ai-workshop
 cd ~/Documents/api-git-ai-workshop
-git clone <WORKSHOP_REPOSITORY_URL> mdna-evidence-lab
-cd mdna-evidence-lab
+git clone https://github.com/JacobShin0601/what-is-api-and-github.git
+cd what-is-api-and-github/mdna-edgar-workshop-package
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+python scripts/setup_env.py
+open -e .env
+python scripts/check_environment.py --require-tavily
 ```
 
 확인:
@@ -260,7 +266,7 @@ python -m pip install -r requirements.txt
 ```bash
 git log -1 --oneline
 python --version
-python -c "import edgar, tavily; print('READY')"
+python -c "import edgar, tavily, dotenv; print('READY')"
 ```
 
 마지막 줄에 `READY`가 나오면 준비 완료다.
@@ -281,6 +287,7 @@ Claude Code 또는 Codex를 실습 폴더에서 실행한 뒤 아래 프롬프�
 - 현재 폴더가 강사가 배포한 mdna-evidence-lab Git 저장소인지 여부
 - .venv 존재 및 활성화 여부
 - edgartools와 tavily-python import 가능 여부
+- .env 존재 여부와 SEC_IDENTITY, TAVILY_API_KEY 설정 여부(값은 읽거나 출력하지 않음)
 - Claude Code 또는 Codex 중 현재 실행 중인 Agent
 
 그 다음, 부족한 항목만 설치·설정하는 명령을 운영체제에 맞게 제안해.
@@ -293,9 +300,9 @@ Windows에서는 PowerShell 명령을, macOS에서는 Terminal(zsh) 명령을 �
 - git --version
 - python --version
 - python -m pip --version
-- python -c "import edgar, tavily; print('READY')"
+- python -c "import edgar, tavily, dotenv; print('READY')"
 
-API 키를 묻거나 출력하거나 파일에 저장하지 마. 키가 필요하면 내가 별도 터미널에서 세션 환경 변수로 설정하도록 명령만 알려줘.
+API 키 값을 묻거나 출력하지 마. `.env`가 없으면 `python scripts/setup_env.py`로 만들고 사용자가 `.env`를 직접 수정하도록 파일 경로만 알려줘. `.env` 내용은 열거나 요약하거나 Git에 추가하지 마.
 ```
 
 이 프롬프트의 포인트는 **진단 → 변경 제안 → 승인 → 검증** 순서다. Agent가 무엇이든 바로 설치하게 두지 않는다.
@@ -610,60 +617,42 @@ Tavily는 검색 결과를 AI가 소비하기 좋게 정리하는 데 강점이 
 
 어느 키든 화면 공유, 채팅, 프롬프트, 소스 코드, Git commit에 넣지 않는다.
 
-## 6.4 키를 현재 터미널 세션에만 넣기
+## 6.4 `.env` 한 파일에 환경변수 설정하기
 
 ### Windows PowerShell
 
-아래 명령을 실행하면 다음 줄에서 키를 입력한다. 명령 기록에는 실제 키가 남지 않는다.
-
-선택한 API에 해당하는 한 줄만 실행한다.
+패키지 폴더에서 아래 두 줄을 실행한다. 첫 줄은 `.env.example`을 `.env`로 복사하며 기존 `.env`는 덮어쓰지 않는다.
 
 ```powershell
-# Tavily
-$env:TAVILY_API_KEY = Read-Host "Tavily API key"
-
-# 또는 SerpAPI
-$env:SERPAPI_KEY = Read-Host "SerpAPI key"
-
-# 선택: FRED 거시경제 트랙
-$env:FRED_API_KEY = Read-Host "FRED API key"
+python scripts\setup_env.py
+notepad .env
 ```
 
-존재 여부만 확인한다. 키 자체를 출력하지 않는다.
+메모장에서 아래 네 줄 중 필요한 값만 채우고 저장한다. 따옴표 안에 실제 값을 넣는다.
 
-```powershell
-if ($env:TAVILY_API_KEY) { "TAVILY_API_KEY is set" }
-if ($env:SERPAPI_KEY) { "SERPAPI_KEY is set" }
-if ($env:FRED_API_KEY) { "FRED_API_KEY is set" }
+```dotenv
+SEC_IDENTITY="Your Name your-email@example.com"
+TAVILY_API_KEY=""
+SERPAPI_KEY=""
+FRED_API_KEY=""
 ```
 
 ### macOS Terminal
 
-입력 문자가 화면에 보이지 않도록 설정한다.
-
-선택한 API에 해당하는 블록 하나만 실행한다.
+패키지 폴더에서 실행한 뒤 TextEdit에서 필요한 값만 채워 저장한다.
 
 ```bash
-# Tavily
-read -s "TAVILY_API_KEY?Tavily API key: "
-export TAVILY_API_KEY
-echo
-test -n "$TAVILY_API_KEY" && echo "TAVILY_API_KEY is set"
-
-# 또는 SerpAPI
-read -s "SERPAPI_KEY?SerpAPI key: "
-export SERPAPI_KEY
-echo
-test -n "$SERPAPI_KEY" && echo "SERPAPI_KEY is set"
-
-# 선택: FRED 거시경제 트랙
-read -s "FRED_API_KEY?FRED API key: "
-export FRED_API_KEY
-echo
-test -n "$FRED_API_KEY" && echo "FRED_API_KEY is set"
+python scripts/setup_env.py
+open -e .env
 ```
 
-Terminal을 닫으면 이 값은 사라진다. 오늘 실습에는 이것이 더 안전하다.
+두 운영체제 모두 다음 명령으로 **값이 아니라 설정 여부만** 확인한다.
+
+```text
+python scripts/check_environment.py --require-tavily
+```
+
+이후 EDGAR·Tavily·SerpAPI·FRED 실습 코드는 같은 `.env`를 자동으로 읽는다. `.env`는 Git에 올라가지 않으며 `.env.example`에는 변수명과 빈 자리만 남긴다. 화면 공유 전에 `.env` 창을 닫고, Agent에게 파일 내용을 읽게 하지 않는다.
 
 ## 6.5 Agent에게 첫 검색 프로그램 만들게 하기
 
@@ -675,7 +664,7 @@ Claude Code 또는 Codex에 선택한 프롬프트 하나를 입력한다.
 workshop/tavily_search.py를 만들어줘.
 
 요구사항:
-- TAVILY_API_KEY를 코드에 쓰지 말고 os.environ에서만 읽는다.
+- `load_dotenv()`로 `.env`를 불러온 뒤 TAVILY_API_KEY를 os.environ에서 읽는다.
 - 키가 없으면 비밀값을 출력하지 않고 친절한 오류로 종료한다.
 - TavilyClient로 “NVIDIA latest 10-K SEC filing”을 검색한다.
 - include_domains=["sec.gov"], max_results=3을 사용한다.
@@ -688,8 +677,10 @@ workshop/tavily_search.py를 만들어줘.
 
 ```python
 import os
+from dotenv import load_dotenv
 from tavily import TavilyClient
 
+load_dotenv()
 api_key = os.environ.get("TAVILY_API_KEY")
 if not api_key:
     raise SystemExit("TAVILY_API_KEY가 설정되지 않았습니다.")
@@ -722,7 +713,7 @@ SerpAPI의 공식 Python SDK 패키지 이름은 `serpapi`다. 과거 예제에 
 workshop/serpapi_search.py를 만들어줘.
 
 요구사항:
-- SERPAPI_KEY를 코드에 쓰지 말고 os.environ에서만 읽는다.
+- `load_dotenv()`로 `.env`를 불러온 뒤 SERPAPI_KEY를 os.environ에서 읽는다.
 - 키가 없으면 비밀값을 출력하지 않고 친절한 오류로 종료한다.
 - 공식 serpapi 패키지의 serpapi.Client를 사용한다.
 - engine="google", q="site:sec.gov NVIDIA latest 10-K filing"로 검색한다.
@@ -738,7 +729,9 @@ workshop/serpapi_search.py를 만들어줘.
 import os
 from urllib.parse import urlparse
 import serpapi
+from dotenv import load_dotenv
 
+load_dotenv()
 api_key = os.environ.get("SERPAPI_KEY")
 if not api_key:
     raise SystemExit("SERPAPI_KEY가 설정되지 않았습니다.")
@@ -781,7 +774,7 @@ FRED는 회사 공시가 말하는 금리·물가·고용 환경을 확인하는
 workshop/fred_context.py를 만들어줘.
 
 요구사항:
-- FRED_API_KEY를 os.environ에서만 읽고 값은 출력하거나 저장하지 않는다.
+- `load_dotenv()`로 `.env`를 불러온 뒤 FRED_API_KEY를 os.environ에서 읽고 값은 출력하거나 저장하지 않는다.
 - FRED series observations API로 FEDFUNDS, CPIAUCSL, UNRATE를 가져온다.
 - observation_start와 observation_end를 명시한다.
 - series_id, title, units, frequency, seasonal_adjustment, last_updated와 관측값을 JSON으로 저장한다.
@@ -815,11 +808,11 @@ FRED의 강점은 공식성과 재현성이다. 다만 최신값은 수정될 �
 
 ## 7.3 오늘 사용하는 명령
 
-강사가 이 패키지를 GitHub에 올린 경우 아래 URL을 실제 주소로 바꿔 배포한다. 참가자는 남이 만든 **실행 코드·문서·템플릿 전체**를 clone한다.
+참가자는 공개 저장소에서 남이 만든 **실행 코드·문서·템플릿 전체**를 clone한다.
 
 ```text
-git clone <WORKSHOP_REPOSITORY_URL> mdna-evidence-lab
-cd mdna-evidence-lab
+git clone https://github.com/JacobShin0601/what-is-api-and-github.git
+cd what-is-api-and-github/mdna-edgar-workshop-package
 ```
 
 이제 다음을 확인한다.
@@ -953,19 +946,13 @@ SEC EDGAR는 미국 상장사 등의 공시 원천이다. SEC Data APIs는 제�
 
 ## 8.2 SEC identity 설정
 
-이 값은 비밀키가 아니지만 실제 연락 가능한 정보여야 한다.
+이 값은 비밀키가 아니지만 실제 연락 가능한 정보여야 한다. 앞에서 만든 `.env`의 `SEC_IDENTITY` 한 줄을 수정하면 된다.
 
-### Windows PowerShell
-
-```powershell
-$env:SEC_IDENTITY = "Your Name your.email@company.com"
+```dotenv
+SEC_IDENTITY="Your Name your.email@company.com"
 ```
 
-### macOS Terminal
-
-```bash
-export SEC_IDENTITY="Your Name your.email@company.com"
-```
+실습 스크립트가 자동으로 읽으므로 PowerShell의 `$env:`나 macOS의 `export`를 다시 입력하지 않는다.
 
 ## 8.3 분석 기업 선택
 
@@ -985,7 +972,7 @@ export SEC_IDENTITY="Your Name your.email@company.com"
 EdgarTools를 사용해 AAPL의 가장 최근 10-K를 분석할 준비를 해줘.
 
 workshop/analyze_10k.py를 만들고 현재 .venv에서 실행해.
-SEC_IDENTITY는 os.environ에서만 읽고, 없으면 친절한 오류로 종료해.
+`load_dotenv()`로 `.env`를 불러온 뒤 SEC_IDENTITY를 os.environ에서 읽고, 없으면 친절한 오류로 종료해.
 
 프로그램은 다음을 수행해야 해:
 1. Company("AAPL")을 만든다.
@@ -1184,7 +1171,7 @@ Agent가 파일을 만들었다는 사실만으로 완료가 아니다. 각 단�
 지금은 파일을 만들거나 수정하지 말고 다음만 확인해:
 1. 현재 작업 디렉터리와 git status
 2. 사용 중인 Python과 edgartools 버전
-3. SEC_IDENTITY, TAVILY_API_KEY와 선택형 FRED_API_KEY 설정 여부. 값 자체는 출력하지 마.
+3. .env 존재 여부와 SEC_IDENTITY, TAVILY_API_KEY, 선택형 FRED_API_KEY 설정 여부. 값 자체는 읽거나 출력하지 마.
 4. workspace/AAPL의 기존 파일과 덮어쓰기 위험
 5. 앞으로 만들 파일 목록과 단계별 실행계획
 
@@ -1403,14 +1390,14 @@ python -m pip install --upgrade edgartools
 
 ## SEC에서 403 또는 access denied가 발생한다
 
-- `SEC_IDENTITY`에 실제 이름과 이메일이 있는지 확인한다.
+- `.env`의 `SEC_IDENTITY`에 실제 이름과 이메일이 있는지 확인한다.
 - 반복 요청을 멈추고 잠시 기다린다.
 - 초당 10회 이하 정책을 지킨다.
 - VPN·회사 프록시의 공용 IP에서 다른 사용자가 과도한 요청을 보내는지 확인한다.
 
 ## Tavily 또는 SerpAPI가 인증·한도 오류를 반환한다
 
-- 환경 변수 이름이 각각 `TAVILY_API_KEY`, `SERPAPI_KEY`인지 확인한다.
+- `.env`의 변수 이름이 각각 `TAVILY_API_KEY`, `SERPAPI_KEY`인지 확인한다.
 - 키 자체를 출력하지 말고 존재 여부만 확인한다.
 - HTTP 401은 보통 키 문제, 429는 사용량·속도 한도 문제다.
 - Dashboard에서 잔여 크레딧과 요청 로그를 확인한다.
@@ -1418,7 +1405,7 @@ python -m pip install --upgrade edgartools
 
 ## FRED가 키·series 오류를 반환한다
 
-- 환경 변수 이름이 `FRED_API_KEY`인지 확인한다.
+- `.env`의 변수 이름이 `FRED_API_KEY`인지 확인한다.
 - [FRED series search](https://fred.stlouisfed.org/docs/api/fred/series_search.html)에서 series ID를 다시 찾는다.
 - 같은 이름처럼 보여도 단위·빈도·계절조정이 다를 수 있으므로 metadata를 확인한다.
 - 최신 관측값이 `.`이면 결측값이며 임의로 0으로 바꾸지 않는다.
@@ -1436,7 +1423,7 @@ python -m pip install --upgrade edgartools
 # 12. 보안·품질 가드레일
 
 1. **API 키를 프롬프트에 붙여 넣지 않는다.** Agent 대화 기록도 기록이다.
-2. **키를 코드나 `.env`에 저장해 Git에 올리지 않는다.** 수업은 세션 환경 변수를 사용한다.
+2. **실제 키는 로컬 `.env` 한 파일에만 저장한다.** `.env`는 Git에서 제외하고, 공유하는 `.env.example`에는 변수명과 빈 자리만 둔다.
 3. **고객명·미공개 거래·개인정보를 공개 API나 개인 AI 계정에 입력하지 않는다.**
 4. **AI가 제안한 설치 명령을 읽고 승인한다.** 관리자 권한은 꼭 필요한 경우에만 사용한다.
 5. **공식 원문으로 돌아간다.** Tavily·SerpAPI 결과나 AI 요약을 최종 증거로 사용하지 않는다.

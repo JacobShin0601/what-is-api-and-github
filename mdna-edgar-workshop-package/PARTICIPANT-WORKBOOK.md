@@ -14,9 +14,8 @@
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-$env:SEC_IDENTITY = "Your Name your-email@example.com"
-$env:TAVILY_API_KEY = Read-Host "Tavily API key"
-# 선택: $env:FRED_API_KEY = Read-Host "FRED API key"
+python scripts\setup_env.py
+notepad .env
 python scripts\check_environment.py --require-tavily
 ```
 
@@ -26,9 +25,8 @@ python scripts\check_environment.py --require-tavily
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-export SEC_IDENTITY="Your Name your-email@example.com"
-read -s "TAVILY_API_KEY?Tavily API key: "; export TAVILY_API_KEY; echo
-# 선택: read -s "FRED_API_KEY?FRED API key: "; export FRED_API_KEY; echo
+python scripts/setup_env.py
+open -e .env
 python scripts/check_environment.py --require-tavily
 ```
 
@@ -37,8 +35,11 @@ python scripts/check_environment.py --require-tavily
 - Python 3.10 이상
 - EdgarTools 5.49.0
 - Tavily SDK 0.7.27과 Tavily key
+- python-dotenv 1.2.3과 `.env` 자동 로드
 - SEC identity 설정
 - `workspace` 쓰기 가능
+
+`.env`에는 실제 값을 적되 내용을 화면에 출력하거나 Agent 프롬프트에 붙여 넣지 않는다. 이후 실습 스크립트는 이 파일을 자동으로 읽으므로 터미널을 다시 열어도 재설정할 필요가 없다.
 
 ## 1. 최신·직전 10-K MD&A 추출
 

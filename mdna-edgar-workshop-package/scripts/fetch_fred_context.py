@@ -11,6 +11,8 @@ from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
+from env_loader import load_workshop_env
+
 
 FRED_API = "https://api.stlouisfed.org/fred"
 
@@ -35,10 +37,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    load_workshop_env()
     args = parse_args()
     api_key = os.getenv("FRED_API_KEY", "").strip()
     if not api_key:
-        raise SystemExit("FRED_API_KEY is not set. Add it to this terminal session and retry.")
+        raise SystemExit("FRED_API_KEY is not set. Fill it in .env and retry.")
 
     ticker = args.ticker.upper().strip()
     output_dir = Path(args.output_root) / ticker

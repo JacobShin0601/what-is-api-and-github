@@ -1247,16 +1247,18 @@ User-Agent: workshop participant@email.com
       &lt;section class=&quot;aad-slide&quot; data-phase=&quot;2&quot; data-note=&quot;두 서비스 중 하나만 가입해도 실습 가능합니다. Tavily는 Agent 검색, SerpAPI는 검색결과 구조화에 초점을 둡니다.&quot;&gt;
         &lt;div class=&quot;aad-kicker&quot;&gt;Search API · 19–23&lt;/div&gt;&lt;h2&gt;Tavily와 SerpAPI, 목적에 맞춰 선택&lt;/h2&gt;
         &lt;div class=&quot;aad-tabs&quot; data-tabs=&quot;search&quot;&gt;&lt;button class=&quot;aad-tab active&quot; type=&quot;button&quot; data-pane=&quot;tavily&quot;&gt;Tavily&lt;/button&gt;&lt;button class=&quot;aad-tab&quot; type=&quot;button&quot; data-pane=&quot;serpapi&quot;&gt;SerpAPI&lt;/button&gt;&lt;/div&gt;
-        &lt;div class=&quot;aad-pane active&quot; data-pane-id=&quot;tavily&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;AI Agent용 검색&lt;/strong&gt;&lt;p&gt;질문 중심 검색, 요약과 관련 본문을 함께 받는 흐름에 적합합니다.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;ol class=&quot;aad-list&quot;&gt;&lt;li&gt;tavily.com에서 계정 생성&lt;/li&gt;&lt;li&gt;Dashboard에서 API key 발급&lt;/li&gt;&lt;li&gt;환경변수 TAVILY_API_KEY로 저장&lt;/li&gt;&lt;li&gt;Agent에게 테스트 호출 요청&lt;/li&gt;&lt;/ol&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;aad-pane&quot; data-pane-id=&quot;serpapi&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;검색결과 구조화&lt;/strong&gt;&lt;p&gt;Google 등 검색엔진 결과의 순위·스니펫·관련 항목을 JSON으로 받는 데 적합합니다.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;ol class=&quot;aad-list&quot;&gt;&lt;li&gt;serpapi.com에서 계정 생성&lt;/li&gt;&lt;li&gt;Dashboard의 API Key 확인&lt;/li&gt;&lt;li&gt;환경변수 SERPAPI_KEY로 저장&lt;/li&gt;&lt;li&gt;검색결과 필드와 출처 확인&lt;/li&gt;&lt;/ol&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;aad-pane active&quot; data-pane-id=&quot;tavily&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;AI Agent용 검색&lt;/strong&gt;&lt;p&gt;질문 중심 검색, 요약과 관련 본문을 함께 받는 흐름에 적합합니다.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;ol class=&quot;aad-list&quot;&gt;&lt;li&gt;tavily.com에서 계정 생성&lt;/li&gt;&lt;li&gt;Dashboard에서 API key 발급&lt;/li&gt;&lt;li&gt;.env의 TAVILY_API_KEY에 입력&lt;/li&gt;&lt;li&gt;환경 점검 후 Agent 호출&lt;/li&gt;&lt;/ol&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;aad-pane&quot; data-pane-id=&quot;serpapi&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;검색결과 구조화&lt;/strong&gt;&lt;p&gt;Google 등 검색엔진 결과의 순위·스니펫·관련 항목을 JSON으로 받는 데 적합합니다.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;ol class=&quot;aad-list&quot;&gt;&lt;li&gt;serpapi.com에서 계정 생성&lt;/li&gt;&lt;li&gt;Dashboard의 API Key 확인&lt;/li&gt;&lt;li&gt;.env의 SERPAPI_KEY에 입력&lt;/li&gt;&lt;li&gt;검색결과 필드와 출처 확인&lt;/li&gt;&lt;/ol&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
       &lt;/section&gt;
 
-      &lt;section class=&quot;aad-slide&quot; data-phase=&quot;2&quot; data-note=&quot;화면 공유 중 키가 노출되지 않게 주의합니다. 참가자에게 채팅이나 저장소에 키를 붙이지 말라고 강조합니다.&quot;&gt;
-        &lt;div class=&quot;aad-kicker&quot;&gt;Key hygiene · 23–25&lt;/div&gt;&lt;h2&gt;API key는 비밀번호처럼 다룹니다&lt;/h2&gt;
-        &lt;div class=&quot;aad-grid2&quot;&gt;
-          &lt;article class=&quot;aad-card&quot;&gt;&lt;strong class=&quot;aad-accent&quot;&gt;Do&lt;/strong&gt;&lt;ul class=&quot;aad-list&quot;&gt;&lt;li&gt;환경변수로 저장&lt;/li&gt;&lt;li&gt;.env는 .gitignore에 추가&lt;/li&gt;&lt;li&gt;노출 시 즉시 폐기·재발급&lt;/li&gt;&lt;/ul&gt;&lt;/article&gt;
-          &lt;article class=&quot;aad-card&quot;&gt;&lt;strong style=&quot;color:var(--deck-coral)&quot;&gt;Don’t&lt;/strong&gt;&lt;ul class=&quot;aad-list&quot;&gt;&lt;li&gt;프롬프트·메일·메신저에 공유&lt;/li&gt;&lt;li&gt;코드나 GitHub에 직접 입력&lt;/li&gt;&lt;li&gt;화면 캡처에 키 포함&lt;/li&gt;&lt;/ul&gt;&lt;/article&gt;
+      &lt;section class=&quot;aad-slide&quot; data-phase=&quot;2&quot; data-note=&quot;참가자는 .env 한 파일만 수정합니다. .env.example은 변수 이름만 공유하고 실제 .env는 Git에서 제외합니다.&quot;&gt;
+        &lt;div class=&quot;aad-kicker&quot;&gt;One-file setup · 23–25&lt;/div&gt;&lt;h2&gt;참가자는 &lt;span class=&quot;aad-accent&quot;&gt;.env 한 파일만&lt;/span&gt; 수정합니다&lt;/h2&gt;
+        &lt;div class=&quot;aad-diagram&quot;&gt;
+          &lt;div class=&quot;aad-node&quot;&gt;📄&lt;b&gt;.env.example&lt;/b&gt;&lt;small&gt;이름·빈 자리만 공유&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;aad-arrow&quot;&gt;복사 →&lt;/div&gt;
+          &lt;div class=&quot;aad-node&quot;&gt;🔐&lt;b&gt;.env&lt;/b&gt;&lt;small&gt;여기만 수정&lt;/small&gt;&lt;/div&gt;&lt;div class=&quot;aad-arrow&quot;&gt;자동 로드 →&lt;/div&gt;
+          &lt;div class=&quot;aad-node&quot;&gt;⚙️&lt;b&gt;모든 스크립트&lt;/b&gt;&lt;small&gt;EDGAR · 검색 · FRED&lt;/small&gt;&lt;/div&gt;
         &lt;/div&gt;
+        &lt;div class=&quot;aad-caution&quot;&gt;&lt;div&gt;&lt;b&gt;Git에는 .env.example만&lt;/b&gt;&lt;br&gt;.env는 .gitignore로 제외합니다.&lt;/div&gt;&lt;div&gt;&lt;b&gt;Agent에는 값이 아닌 상태만&lt;/b&gt;&lt;br&gt;키를 읽거나 화면에 출력하지 않습니다.&lt;/div&gt;&lt;/div&gt;
       &lt;/section&gt;
 
       &lt;section class=&quot;aad-slide&quot; data-phase=&quot;3&quot; data-note=&quot;Git은 변경 이력, GitHub는 공유 공간, clone은 전체 산출물을 내 컴퓨터로 복제하는 행위라고 구분합니다.&quot;&gt;
@@ -1298,7 +1300,7 @@ User-Agent: workshop participant@email.com
       &lt;section class=&quot;aad-slide&quot; data-phase=&quot;4&quot; data-note=&quot;긴 프롬프트 하나로 최종 보고서를 만들지 않습니다. SEC 추출, 최신 사건, 거시맥락을 분리해 모은 뒤 통합하고 사람이 gate를 통과시킵니다.&quot;&gt;
         &lt;div class=&quot;aad-kicker&quot;&gt;Hybrid Lab · 33–49&lt;/div&gt;&lt;h2&gt;원문에서 보고서까지, &lt;span class=&quot;aad-accent&quot;&gt;역할을 나눠 연결합니다&lt;/span&gt;&lt;/h2&gt;
         &lt;div class=&quot;aad-dd-flow&quot;&gt;
-          &lt;article class=&quot;aad-dd-step&quot;&gt;&lt;b&gt;33–35&lt;/b&gt;&lt;span&gt;0 · Audit&lt;/span&gt;&lt;small&gt;환경·git·키 존재 여부&lt;/small&gt;&lt;/article&gt;
+          &lt;article class=&quot;aad-dd-step&quot;&gt;&lt;b&gt;33–35&lt;/b&gt;&lt;span&gt;0 · Audit&lt;/span&gt;&lt;small&gt;환경·git·.env 설정 여부&lt;/small&gt;&lt;/article&gt;
           &lt;article class=&quot;aad-dd-step&quot;&gt;&lt;b&gt;35–41&lt;/b&gt;&lt;span&gt;1–2 · EDGAR&lt;/span&gt;&lt;small&gt;최신·직전 Item 7 + 숫자&lt;/small&gt;&lt;/article&gt;
           &lt;article class=&quot;aad-dd-step&quot;&gt;&lt;b&gt;41–45&lt;/b&gt;&lt;span&gt;3 · Tavily&lt;/span&gt;&lt;small&gt;공시 후 최신 사건·반대 근거&lt;/small&gt;&lt;/article&gt;
           &lt;article class=&quot;aad-dd-step&quot;&gt;&lt;b&gt;45–49&lt;/b&gt;&lt;span&gt;FRED · 선택&lt;/span&gt;&lt;small&gt;금리·물가·고용 context&lt;/small&gt;&lt;/article&gt;
@@ -1334,25 +1336,21 @@ User-Agent: workshop participant@email.com
       &lt;section class=&quot;aad-slide&quot; data-phase=&quot;4&quot; data-note=&quot;참가자는 저장소 루트에서 자기 Agent를 실행합니다. Turn 0에서 바로 코드를 만들게 하지 말고 계획을 승인한 뒤 Turn 1과 2를 진행합니다.&quot;&gt;
         &lt;div class=&quot;aad-kicker&quot;&gt;Hands-on · 33–49&lt;/div&gt;&lt;h2&gt;내 Claude Code / Codex에서 시작&lt;/h2&gt;
         &lt;div class=&quot;aad-tabs&quot; data-tabs=&quot;os&quot;&gt;&lt;button class=&quot;aad-tab active&quot; type=&quot;button&quot; data-pane=&quot;windows&quot;&gt;Windows PowerShell&lt;/button&gt;&lt;button class=&quot;aad-tab&quot; type=&quot;button&quot; data-pane=&quot;mac&quot;&gt;macOS Terminal&lt;/button&gt;&lt;/div&gt;
-        &lt;div class=&quot;aad-pane active&quot; data-pane-id=&quot;windows&quot;&gt;&lt;div class=&quot;aad-terminal&quot;&gt;&lt;div class=&quot;aad-terminal-head&quot;&gt;PowerShell · 저장소 루트에서&lt;/div&gt;&lt;pre&gt;git status --short
-python --version
-$env:SEC_IDENTITY = &quot;Name email@company.com&quot;
-$env:TAVILY_API_KEY = Read-Host &quot;Tavily key&quot;
-# 선택: $env:FRED_API_KEY = Read-Host &quot;FRED key&quot;
-codex   # 또는 claude&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;aad-pane&quot; data-pane-id=&quot;mac&quot;&gt;&lt;div class=&quot;aad-terminal&quot;&gt;&lt;div class=&quot;aad-terminal-head&quot;&gt;Terminal · 저장소 루트에서&lt;/div&gt;&lt;pre&gt;git status --short
-python3 --version
-export SEC_IDENTITY=&quot;Name email@company.com&quot;
-read -s &quot;TAVILY_API_KEY?Tavily key: &quot;; export TAVILY_API_KEY; echo
-# 선택: read -s &quot;FRED_API_KEY?FRED key: &quot;; export FRED_API_KEY; echo
-codex   # 또는 claude&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;aad-checks&quot;&gt;&lt;button class=&quot;aad-check&quot; type=&quot;button&quot;&gt;Turn 0 · 계획과 변경 파일 승인&lt;/button&gt;&lt;button class=&quot;aad-check&quot; type=&quot;button&quot;&gt;Turn 1 · 최신·직전 filing identity 확인&lt;/button&gt;&lt;button class=&quot;aad-check&quot; type=&quot;button&quot;&gt;Turn 2 · MD&amp;amp;A claim + 숫자 연결&lt;/button&gt;&lt;button class=&quot;aad-check&quot; type=&quot;button&quot;&gt;Turn 3 · Tavily + 선택 FRED 수집&lt;/button&gt;&lt;/div&gt;
+        &lt;div class=&quot;aad-pane active&quot; data-pane-id=&quot;windows&quot;&gt;&lt;div class=&quot;aad-terminal&quot;&gt;&lt;div class=&quot;aad-terminal-head&quot;&gt;PowerShell · 패키지 폴더에서&lt;/div&gt;&lt;pre&gt;python scripts\setup_env.py
+notepad .env       # 이 파일만 수정·저장
+python scripts\check_environment.py --require-tavily
+codex              # 또는 claude&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;aad-pane&quot; data-pane-id=&quot;mac&quot;&gt;&lt;div class=&quot;aad-terminal&quot;&gt;&lt;div class=&quot;aad-terminal-head&quot;&gt;Terminal · 패키지 폴더에서&lt;/div&gt;&lt;pre&gt;python scripts/setup_env.py
+open -e .env       # 이 파일만 수정·저장
+python scripts/check_environment.py --require-tavily
+codex              # 또는 claude&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;aad-checks&quot;&gt;&lt;button class=&quot;aad-check&quot; type=&quot;button&quot;&gt;환경 파일 · .env 생성·설정&lt;/button&gt;&lt;button class=&quot;aad-check&quot; type=&quot;button&quot;&gt;Turn 0 · 계획과 변경 파일 승인&lt;/button&gt;&lt;button class=&quot;aad-check&quot; type=&quot;button&quot;&gt;Turn 1–2 · EDGAR + MD&amp;amp;A claim&lt;/button&gt;&lt;button class=&quot;aad-check&quot; type=&quot;button&quot;&gt;Turn 3 · Tavily + 선택 FRED&lt;/button&gt;&lt;/div&gt;
       &lt;/section&gt;
 
       &lt;section class=&quot;aad-slide&quot; data-phase=&quot;4&quot; data-note=&quot;탭을 순서대로 누르며 각 Agent turn의 지시와 정지 조건을 설명합니다. 참가자는 한 단계가 끝날 때마다 결과 파일을 열어보고 다음 프롬프트를 입력합니다.&quot;&gt;
         &lt;div class=&quot;aad-kicker&quot;&gt;Agent turns · 49–58&lt;/div&gt;&lt;h2&gt;각 turn은 &lt;span class=&quot;aad-accent&quot;&gt;산출물 + 정지 조건&lt;/span&gt;이 있습니다&lt;/h2&gt;
         &lt;div class=&quot;aad-tabs&quot; data-tabs=&quot;dd&quot;&gt;&lt;button class=&quot;aad-tab active&quot; type=&quot;button&quot; data-pane=&quot;dd0&quot;&gt;0 계획&lt;/button&gt;&lt;button class=&quot;aad-tab&quot; type=&quot;button&quot; data-pane=&quot;dd1&quot;&gt;1 EDGAR&lt;/button&gt;&lt;button class=&quot;aad-tab&quot; type=&quot;button&quot; data-pane=&quot;dd2&quot;&gt;2 Claims&lt;/button&gt;&lt;button class=&quot;aad-tab&quot; type=&quot;button&quot; data-pane=&quot;dd3&quot;&gt;3 External&lt;/button&gt;&lt;button class=&quot;aad-tab&quot; type=&quot;button&quot; data-pane=&quot;dd4&quot;&gt;4 Merge&lt;/button&gt;&lt;button class=&quot;aad-tab&quot; type=&quot;button&quot; data-pane=&quot;dd5&quot;&gt;5–7 Deliver&lt;/button&gt;&lt;/div&gt;
-        &lt;div class=&quot;aad-pane active&quot; data-pane-id=&quot;dd0&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;Agent 지시&lt;/strong&gt;&lt;p&gt;현재 경로·git·버전·기존 출력과 덮어쓰기 위험을 확인하고 실행계획만 제시해.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;멈추는 곳&lt;/strong&gt;&lt;p&gt;파일을 수정하지 않은 채 변경 예정 파일 목록을 사람이 승인합니다.&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;aad-pane active&quot; data-pane-id=&quot;dd0&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;Agent 지시&lt;/strong&gt;&lt;p&gt;현재 경로·git·버전·.env의 변수 설정 여부·덮어쓰기 위험을 확인하고 실행계획만 제시해. 값은 읽지 마.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;멈추는 곳&lt;/strong&gt;&lt;p&gt;비밀값을 출력하지 않은 채 변경 예정 파일 목록을 사람이 승인합니다.&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
         &lt;div class=&quot;aad-pane&quot; data-pane-id=&quot;dd1&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;Agent 지시&lt;/strong&gt;&lt;p&gt;최신·직전 10-K의 form·기간·accession과 Item 7 경계를 저장하고 분석하지 마.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;Gate A&lt;/strong&gt;&lt;p&gt;사람이 법인·기간·원문 링크와 extraction check를 직접 확인합니다.&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
         &lt;div class=&quot;aad-pane&quot; data-pane-id=&quot;dd2&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;Agent 지시&lt;/strong&gt;&lt;p&gt;전년 변화와 검증 가능한 경영진 claim을 뽑고 재무 숫자의 기간·단위를 연결해.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;완료 기준&lt;/strong&gt;&lt;p&gt;management claim과 해석이 분리되고 모든 claim이 accession으로 돌아갑니다.&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
         &lt;div class=&quot;aad-pane&quot; data-pane-id=&quot;dd3&quot;&gt;&lt;div class=&quot;aad-compare&quot;&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;Agent 지시&lt;/strong&gt;&lt;p&gt;Tavily로 최신 사건을 찾고, 관련성이 있을 때만 FRED series를 context_only로 수집해.&lt;/p&gt;&lt;/article&gt;&lt;article class=&quot;aad-card&quot;&gt;&lt;strong&gt;정지 조건&lt;/strong&gt;&lt;p&gt;키를 노출하지 않고 URL·발행일·series ID·관측일을 보여준 뒤 멈춥니다.&lt;/p&gt;&lt;/article&gt;&lt;/div&gt;&lt;/div&gt;
